@@ -7,7 +7,7 @@ class Mosaic {
 
     render() {
         const element = document.createElement('div');
-        element.classList.add('.mosaic')
+        element.classList.add('mosaic')
         element.innerHTML = this.createTemplate();
 
         this.element = element;
