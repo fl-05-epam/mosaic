@@ -44,6 +44,7 @@ const data = {
     blocks: 9
 }
 
-const root = document.getElementById('root');
-const mosaic = new Mosaic(data);
-root.append(mosaic.element);
+//тимчасове створення елементів
+const mosaic= document.getElementById('mosaic');
+const blocks = new Mosaic(data);
+mosaic.append(blocks.element);
