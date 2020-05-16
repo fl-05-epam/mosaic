@@ -1,0 +1,2 @@
+# mosaic
+Simple mosaic game
