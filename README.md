@@ -8,7 +8,7 @@
 
     `git remote add origin <ccылка на Ваш форк>`
     
-    `git remote add upstream https://github.com/fl-05-epam/animation.git`
+    `git remote add upstream https://github.com/fl-05-epam/mosaic.git`
     
 3. Алгоритм работы: 
     `git checkout develop` - переключаемс на девелоп
