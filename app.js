@@ -76,8 +76,8 @@ class Mosaic {
 
             for (let i = 0; i < blocksElement.length; i++) {
                 const parent = blocksElement[i];
-                const parentHeight = parseInt(parent.style.height, 10) / Mosaic.minHeight;
-                const parentWidth = parseInt(parent.style.width, 10) / Mosaic.minWidth;
+                const parentHeight = parseInt(parent.style.height,10) / Mosaic.minHeight;
+                const parentWidth = parseInt(parent.style.width,10) / Mosaic.minWidth;
 
                 if (parentHeight > 1 && parentWidth > 1) {
                     Math.round(Math.random())
@@ -150,10 +150,14 @@ const addEventListeners = function () {
     const borderColorSelector = document.getElementById('border-color');
     const blockColorSelector = document.getElementById('fragment-color');
     const blocksGenerator = document.getElementById('generate-button');
+    const userSetAmount = document.getElementById('user-amount');
+    const userSetRandom = document.getElementById('set-random');
 
     borderColorSelector.addEventListener('change', onBorderChange);
     blockColorSelector.addEventListener('change', onBlockColorChange);
     blocksGenerator.addEventListener('click', onGenerateBtnClick);
+    userSetAmount.addEventListener('click',onGenerateBtnClick);
+    userSetRandom.addEventListener('click',onGenerateBtnClick)
 
 }
 
@@ -173,8 +177,11 @@ const onBlockColorChange = (event) => {
 }
 
 const onGenerateBtnClick = (event) => {
+    const modal = document.getElementById("my-modal");
+    modal.style.display = "none";
     const mosaic = document.getElementById('mosaic');
-    const blocksAmount = getRandomAmount();
+    const setAmount = parseInt(document.getElementById("set-user").value);
+    const blocksAmount = setAmount ? setAmount : getRandomAmount();
     const data = {
         mosaicWidth: 1000,
         mosaicHeight: 600,
