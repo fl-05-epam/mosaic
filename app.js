@@ -1,20 +1,49 @@
 let mosaic = document.getElementById('mosaic');
-let num = 39; //майбутнє рандомне число
-for (let i = 0; i < 9; i++) {
-    let newDiv = document.createElement('div');
-    newDiv.className = 'newDiv';
-    newDiv.setAttribute('id', `div${i}`);
-    mosaic.append(newDiv);
-    if (num % 2 !== 0){
-        newDiv.style.gridTemplateColumns = `1fr 2fr`;
-    }else{
-        newDiv.style.gridTemplateColumns = `1fr`;
+const TOTAL_RECTANGLES_AMOUNT = 10;
+let list_amount_rectangles = TOTAL_RECTANGLES_AMOUNT;
+let amount_horizontal_blocks = 400;
+let amount_vertical_blocks = 100;
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+}
+
+console.log(TOTAL_RECTANGLES_AMOUNT);
+
+function create_rectangles(num) {
+    for (let i = 0; i < num; i++) {
+        let div = document.createElement('div');
+        div.className = 'rectangle';
+        set_size(div);
+        mosaic.append(div);
     }
-    if (num > 9 && num < 40000) {
-        for (let i = 9; i < num; i++) {
-            let childDiv = document.createElement('div');
-            childDiv.className = 'childDiv';
-            newDiv.append(childDiv)
-        }
-    }
+
+    let last_div = document.createElement('div');
+    last_div.className = 'last-div';
+    mosaic.append(last_div);
+    last_div.style.gridColumn = `auto / span ${amount_vertical_blocks}`;
+    last_div.style.gridRow= `auto / span ${amount_horizontal_blocks}`;
+}
+
+create_rectangles(TOTAL_RECTANGLES_AMOUNT - 1);
+
+function set_size(div) {
+    let vertical_blocks = getRandomIntInclusive(1, count_max_verical_blocks_amount_limit());
+    let horizontal_blocks = getRandomIntInclusive(1, count_max_horizontal_blocks_amount_limit());
+    list_amount_rectangles -= 1;
+    amount_horizontal_blocks -= horizontal_blocks;
+    amount_vertical_blocks -= vertical_blocks;
+    div.style.gridColumn = `auto / span ${vertical_blocks}`;
+    div.style.gridRow= `auto / span ${horizontal_blocks}`;
+
+}
+
+function count_max_verical_blocks_amount_limit() {
+    return amount_vertical_blocks - list_amount_rectangles;
+}
+
+function count_max_horizontal_blocks_amount_limit() {
+    return amount_horizontal_blocks - list_amount_rectangles;
 }
