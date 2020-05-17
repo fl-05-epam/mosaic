@@ -1,5 +1,5 @@
 let mosaic = document.getElementById('mosaic');
-const TOTAL_RECTANGLES_AMOUNT = getRandomIntInclusive(9, 20);
+const TOTAL_RECTANGLES_AMOUNT = getRandomIntInclusive(9, 20);//максимальна кількість поки що 20 , бо на 40тис підвисає
 console.log('TOTAL_RECTANGLES_AMOUNT', TOTAL_RECTANGLES_AMOUNT);
 let list_amount_rectangles = TOTAL_RECTANGLES_AMOUNT - 1;
 let amount_horizontal_blocks = 400;

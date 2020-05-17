@@ -18,68 +18,7 @@
     grid-auto-flow: row dense;
     grid-template-columns: repeat(100, 1fr);
     grid-template-rows: repeat(400, 1fr);
-    /*align-items: stretch;*/
 }
 .rectangle{
     border: solid 1px;
 }
-/*.newDiv {*/
-/*    border: solid 1px;*/
-/*}*/
-
-/*#div0 {*/
-/*    display: grid;*/
-/*    grid-column: auto /span 2;*/
-/*}*/
-
-/*#div1 {*/
-/*    display: grid;*/
-/*    grid-column: 3  / 6*/
-/*}*/
-
-/*#div2 {*/
-/*    display: grid;*/
-/*    grid-column: 3 / 5;*/
-/*    grid-row: 4 / 6;*/
-/*}*/
-
-/*#div3 {*/
-/*    display: grid;*/
-/*    grid-column: 5 / 7;*/
-/*    grid-row: 5 / 6;*/
-/*}*/
-
-/*#div4 {*/
-/*    display: grid;*/
-/*    grid-column: 1 / 2;*/
-/*    grid-row: 2 / 6;*/
-/*}*/
-
-/*#div5 {*/
-/*    display: grid;*/
-/*    grid-column: 5 / 7;*/
-/*    grid-row: 4 / 5;*/
-/*}*/
-
-/*#div6 {*/
-/*    display: grid;*/
-/*    grid-column: 2 / 3;*/
-/*    grid-row: 4 / 6;*/
-/*}*/
-
-/*#div7 {*/
-/*    display: grid;*/
-/*    grid-column: 2 / 6;*/
-/*    grid-row: 2 / 4;*/
-/*}*/
-
-/*#div8 {*/
-/*    display: grid;*/
-/*    grid-template-columns: 1fr 2fr;*/
-/*    grid-column: 6 / 7;*/
-/*    grid-row: 1 / 4;*/
-/*}*/
-
-/*.childDiv {*/
-/*    border: solid 1px;*/
-/*}*/
