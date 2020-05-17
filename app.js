@@ -1,30 +1,22 @@
-class Mosaic {
-    static MIN_NUMBER = 9;
-    //todo для 4000;
-    static MAX_NUMBER = 40000;
-    static GAME_HEIGHT = 600;
-    static GAME_WIDTH = 800;
+const MIN_NUMBER = 9;
+const MAX_NUMBER = 40000;
 
+class Mosaic {
     static minHeight;
     static minWidth;
 
-    constructor() {
-        this.blocksAmount = 10 //this.randomAmount;
+    constructor(params) {
+        this.params = params;
         this.render();
     }
 
     render() {
         const element = document.createElement('div');
-        element.classList.add('mosaic')
-        element.innerHTML = '<div class="mosaic__block"></div>';
-        console.log(element.children);
-        element.firstChild.style.height = Mosaic.GAME_HEIGHT + 'px';
-        element.firstChild.style.width = Mosaic.GAME_WIDTH + 'px';
-        element.style.height = Mosaic.GAME_HEIGHT + 2 + 'px';
-        element.style.width = Mosaic.GAME_WIDTH + 2 + 'px';
+        element.classList.add('mosaic');
 
-        //todo стили вынести;
-        element.style.border = '1px solid #A5A5A5';
+        element.innerHTML = '<div class="mosaic__block"></div>';
+        element.firstChild.style.height = this.params.mosaicHeight + 'px';
+        element.firstChild.style.width = this.params.mosaicWidth + 'px';
 
         this.element = element;
         this.getSizes();
@@ -32,36 +24,31 @@ class Mosaic {
         this.initEventListeners();
     }
 
-    get randomAmount() {
-        //todo возможно ли сократить формулу;
-        return Mosaic.MIN_NUMBER + Math.floor(Math.random() * (Mosaic.MAX_NUMBER / 10 + 1 - Mosaic.MIN_NUMBER));
-    }
-
     getSizes() {
-        //todo изменить размеры для MAX - 4000;
-        const numberElement = this.blocksAmount;
+        //todo изменить размеры;
+        const numberElement = this.params.blocksAmount;
         switch (true) {
             case numberElement <= 200:
-                Mosaic.minHeight = Mosaic.GAME_HEIGHT / 10;
-                Mosaic.minWidth = Mosaic.GAME_WIDTH / 10;
+                Mosaic.minWidth = this.params.mosaicWidth / 10;
+                Mosaic.minHeight = this.params.mosaicHeight / 10;
                 break;
             case numberElement <= 1800:
-                Mosaic.minHeight = Mosaic.GAME_HEIGHT / 50;
-                Mosaic.minWidth = Mosaic.GAME_WIDTH / 50;
+                Mosaic.minWidth = this.params.mosaicWidth / 50;
+                Mosaic.minHeight = this.params.mosaicHeight / 50;
                 break;
             case numberElement <= 5000:
-                Mosaic.minHeight = Mosaic.GAME_HEIGHT / 100;
-                Mosaic.minWidth = Mosaic.GAME_WIDTH / 100;
+                Mosaic.minWidth = this.params.mosaicWidth / 100;
+                Mosaic.minHeight = this.params.mosaicHeight / 100;
                 break;
             default:
-                Mosaic.minHeight = Mosaic.GAME_HEIGHT / 200;
-                Mosaic.minWidth = Mosaic.GAME_WIDTH / 200;
+                Mosaic.minWidth = this.params.mosaicWidth / 200;
+                Mosaic.minHeight = this.params.mosaicHeight / 200;
         }
 
     }
 
     createTemplate() {
-        const numberElement = this.blocksAmount;
+        const numberElement = this.params.blocksAmount;
         let counter = 1;
 
         while (counter < numberElement) {
@@ -184,9 +171,20 @@ const onBlockColorChange = (event) => {
 
 const onGenerateBtnClick = (event) => {
     const mosaic = document.getElementById('mosaic');
-
-    const blocks = new Mosaic();
+    const blocksAmount = getRandomAmount();
+    const data = {
+        //todo change sizes
+        mosaicHeight:600,
+        mosaicWidth:800,
+        blocksAmount: blocksAmount
+    }
+    const blocks = new Mosaic(data);
     mosaic.append(blocks.element);
+}
+
+const getRandomAmount  = () =>{
+        //todo возможно ли сократить формулу;
+    return MIN_NUMBER + Math.floor(Math.random() * (MAX_NUMBER / 10 + 1 - MIN_NUMBER));
 }
 
 addEventListeners();
