@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mosaic</title>
-    <link rel="stylesheet" href="styles/styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Mosaic</title>
+	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <div id="root">
-        <div class="top-bar">
-            <form action="">
-                <input type="color" id="border-color" value="#a5a5a5">
-                <label for="border-color">Mosaic border color</label>
-                
-                <input type="color" id="fragment-color" value="#5aafe8">
-                <label for="fragment-color">Fragment background color</label>
-            </form>
-    
-    
-            <button id="generate-button">Generate New</button>
-        </div>
-        
-
-        <div id="mosaic"></div>
+<div id="root">
+	<div class="top-bar">
+		<form action="">
+			<label for="border-color">Mosaic border color</label>
+			<input type="color" id="border-color" value="#a5a5a5">
+			<label for="fragment-color">Fragment background color</label>
+			<input type="color" id="fragment-color" value="#5aafe8">
+		</form>
+		<button id="generate-button">Generate New</button>
+	</div>
+	<div id="mosaic"></div>
+</div>
+<div id="my-modal" class="modal">
+    <div class="modal-content">
+        <p>Set amount of rectangles</p>
+        <input type="number" id="set-user" min="9">
+        <input type="button" id="user-amount" value="Generate"/>
+        <input type="button" id="set-random"  value="Generate random"/>
     </div>
-
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <p>Set amount of rectangles</p>
-            <input type="number" id="set-user" min="9">
-            <input type="button" id="user-amount" value="Generate"/>
-            <input type="button" id="set-random"  value="Generate random"/>
-        </div>
-    </div>
-    <script src="app.js"></script>
+</div>
+<script src="app.js"></script>
 </body>
 </html>
