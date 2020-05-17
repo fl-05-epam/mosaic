@@ -1,20 +1,55 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+#root{
+    max-width: 1600px;
+    width:90%;
+    margin: 0 auto;
 }
 
 .top-bar{
     display: flex;
     justify-content: space-between;
-    margin: 0 10px;
+    max-width: 1600px;
+    margin:5px auto 20px auto;
+}
+
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label{
+    margin-left: 5px;
+}
+
+#generate-button{
+    color: white;
+    background-color:  #10d3a2;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 5px;
 }
 
 #mosaic{
-    min-height: 400px; /* Тимчасова величина, просто щоб було видно */
-    border: 1px solid gray;
-    margin: 10px;
+    margin: 0 auto;
+}
+
+.mosaic{
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
 }
 
 .mosaic__block{
     border: 1px solid #a5a5a5;
+}
+
+.container,
+.mosaic__block{
+    float: left;
 }
