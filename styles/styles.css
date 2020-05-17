@@ -6,7 +6,6 @@
 .top-bar{
     display: flex;
     justify-content: space-between;
-    margin: 0 10px;
     max-width: 1600px;
     margin:5px auto 20px auto; 
 }
