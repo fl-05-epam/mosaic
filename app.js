@@ -26,17 +26,17 @@ class Mosaic {
 
     getSizes() {
         //todo изменить размеры;
-        const numberElement = this.params.blocksAmount;
+        const blocks = this.params.blocksAmount;
         switch (true) {
-            case numberElement <= 200:
+            case blocks <= 200:
                 Mosaic.minWidth = this.params.mosaicWidth / 10;
                 Mosaic.minHeight = this.params.mosaicHeight / 10;
                 break;
-            case numberElement <= 1800:
+            case blocks <= 1800:
                 Mosaic.minWidth = this.params.mosaicWidth / 50;
                 Mosaic.minHeight = this.params.mosaicHeight / 50;
                 break;
-            case numberElement <= 5000:
+            case blocks <= 5000:
                 Mosaic.minWidth = this.params.mosaicWidth / 100;
                 Mosaic.minHeight = this.params.mosaicHeight / 100;
                 break;
@@ -48,77 +48,83 @@ class Mosaic {
     }
 
     createTemplate() {
-        const numberElement = this.params.blocksAmount;
+        //змінні перейменовано, але трохи код підправити;
+        const blocks = this.params.blocksAmount;
         let counter = 1;
 
-        while (counter < numberElement) {
-            let insideGame = this.element.querySelectorAll('.mosaic__block');
+        while (counter < blocks) {
+            const blocksElement = this.element.querySelectorAll('.mosaic__block');
 
-            for (let i = 0; i < insideGame.length; i++) {
-                const parent = insideGame[i];
-                const parentHeight = parseInt(parent.style.height) / Mosaic.minHeight;
-                const  parentWidth = parseInt(parent.style.width) / Mosaic.minWidth;
+            for (let i = 0; i < blocksElement.length; i++) {
+                const parent = blocksElement[i];
+                const parentHeight = parseInt(parent.style.height,10) / Mosaic.minHeight;
+                const parentWidth = parseInt(parent.style.width,10) / Mosaic.minWidth;
 
                 if (parentHeight > 1 && parentWidth > 1) {
                     Math.round(Math.random())
-                        ? this.partHeight(parent, parentHeight, parentWidth)
-                        : this.partWidth(parent, parentHeight, parentWidth);
+                        ? this.partHeight(counter, parent, parentHeight, parentWidth)
+                        : this.partWidth(counter, parent, parentHeight, parentWidth);
                     counter += 1;
                     i++;
                 } else if (parentWidth === 1 && parentHeight > 1) {
-                    this.partHeight(parent, parentHeight, parentWidth);
+                    this.partHeight(counter,parent, parentHeight, parentWidth);
                     counter += 1;
                     i++;
                 } else if (parentHeight === 1 && parentWidth > 1) {
-                    this.partWidth(parent, parentHeight, parentWidth);
+                    this.partWidth(counter, parent, parentHeight, parentWidth);
                     counter +=1;
                     i++;
                 } else {
                     continue;
                 }
 
-                if (counter === numberElement) {
+                if (counter === blocks) {
                     break;
                 }
             }
         }
     }
 
-    partWidth(parent, parentHeight, parentWidth) {
+    partWidth(id, parent, parentHeight, parentWidth) {
+        //тут все ок.
         parent.classList.add('container');
         parent.classList.remove('mosaic__block');
-        let width1 = 1 + Math.floor(Math.random() * (parentWidth - 1));
-        let width2 = parentWidth - width1;
-        let insideGame1 = this.createElem('div', parent, 'mosaic__block');
-        insideGame1.style.height = parentHeight * Mosaic.minHeight + 'px';
-        insideGame1.style.width = width1 * Mosaic.minWidth + 'px';
-        let insideGame2 = this.createElem('div', parent, 'mosaic__block');
-        insideGame2.style.height = parentHeight * Mosaic.minHeight + 'px';
-        insideGame2.style.width = width2 * Mosaic.minWidth + 'px';
+        parent.removeAttribute('tabindex');
+
+        const widthOne = 1 + Math.floor(Math.random() * (parentWidth - 1));
+        const firstBlock = this.createElem(id, parent);
+        firstBlock.style.height = parentHeight * Mosaic.minHeight + 'px';
+        firstBlock.style.width = widthOne * Mosaic.minWidth + 'px';
+
+        const widthTwo = parentWidth - widthOne;
+        const secondBlock = this.createElem(id, parent);
+        secondBlock.style.height = parentHeight * Mosaic.minHeight + 'px';
+        secondBlock.style.width = widthTwo * Mosaic.minWidth + 'px';
     }
 
-    partHeight(parent, parentHeight, parentWidth) {
-        console.log(parent);
+    partHeight(id,parent, parentHeight, parentWidth) {
+        //тут все ок.
         parent.classList.add('container');
         parent.classList.remove('mosaic__block');
-        let height1 = 1 + Math.floor(Math.random() * (parentHeight - 1));
-        let height2 = parentHeight - height1;
-        let insideGame1 = this.createElem('div', parent, 'mosaic__block');
-        insideGame1.style.height = height1 * Mosaic.minHeight + 'px';
-        insideGame1.style.width = parentWidth * Mosaic.minWidth + 'px';
-        let insideGame2 = this.createElem('div', parent, 'mosaic__block');
-        insideGame2.style.height = height2 * Mosaic.minHeight + 'px';
-        insideGame2.style.width = parentWidth * Mosaic.minWidth + 'px';
+        parent.removeAttribute('tabindex');
+
+        const heightOne = 1 + Math.floor(Math.random() * (parentHeight - 1));
+        const firstBlock = this.createElem(id,parent);
+        firstBlock.style.height = heightOne * Mosaic.minHeight + 'px';
+        firstBlock.style.width = parentWidth * Mosaic.minWidth + 'px';
+
+        const heightTwo = parentHeight - heightOne;
+        const secondBlock = this.createElem(id, parent);
+        secondBlock.style.height = heightTwo * Mosaic.minHeight + 'px';
+        secondBlock.style.width = parentWidth * Mosaic.minWidth + 'px';
     }
 
-    createElem(strElem, parent, strClass) {
-        let elem = document.createElement(strElem);
-        if (strClass) {
-            elem.className = strClass;
-        }
-        if (parent) {
-            parent.appendChild(elem);
-        }
+    createElem(id, parent) {
+        //тут все ок.
+        const elem = document.createElement('div');
+        elem.className = 'mosaic__block';
+        elem.setAttribute('tabindex', id);
+        parent.appendChild(elem);
 
         return elem;
     }
@@ -128,8 +134,11 @@ class Mosaic {
     }
 
     onMosaicClick(event) {
+        //тут все ок.
         const target = event.target;
         const oldFocused = this.element.querySelectorAll('.focused');
+        const blockColor = document.getElementById('fragment-color').value;
+        const borderColor = document.getElementById('border-color').value;
 
         if (oldFocused) {
             oldFocused.forEach(item => item.classList.remove('focused'));
@@ -138,6 +147,8 @@ class Mosaic {
         if (target.classList.contains('mosaic__block')) {
             target.focus();
             target.classList.add('focused');
+            target.style.backgroundColor = blockColor;
+            target.style.borderColor =borderColor;
         }
     }
 }
