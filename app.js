@@ -61,8 +61,8 @@ class Mosaic {
 
             for (let i = 0; i < blocksElement.length; i++) {
                 const parent = blocksElement[i];
-                const parentHeight = parseInt(parent.style.height,10) / Mosaic.minHeight;
-                const parentWidth = parseInt(parent.style.width,10) / Mosaic.minWidth;
+                const parentHeight = parseInt(parent.style.height, 10) / Mosaic.minHeight;
+                const parentWidth = parseInt(parent.style.width, 10) / Mosaic.minWidth;
 
                 if (parentHeight > 1 && parentWidth > 1) {
                     Math.round(Math.random())
@@ -71,12 +71,12 @@ class Mosaic {
                     counter += 1;
                     i++;
                 } else if (parentWidth === 1 && parentHeight > 1) {
-                    this.partHeight(counter,parent, parentHeight, parentWidth);
+                    this.partHeight(counter, parent, parentHeight, parentWidth);
                     counter += 1;
                     i++;
                 } else if (parentHeight === 1 && parentWidth > 1) {
                     this.partWidth(counter, parent, parentHeight, parentWidth);
-                    counter +=1;
+                    counter += 1;
                     i++;
                 } else {
                     continue;
@@ -106,14 +106,14 @@ class Mosaic {
         secondBlock.style.width = widthTwo * Mosaic.minWidth + 'px';
     }
 
-    partHeight(id,parent, parentHeight, parentWidth) {
+    partHeight(id, parent, parentHeight, parentWidth) {
         //тут все ок.
         parent.classList.add('container');
         parent.classList.remove('mosaic__block');
         parent.removeAttribute('tabindex');
 
         const heightOne = 1 + Math.floor(Math.random() * (parentHeight - 1));
-        const firstBlock = this.createElem(id,parent);
+        const firstBlock = this.createElem(id, parent);
         firstBlock.style.height = heightOne * Mosaic.minHeight + 'px';
         firstBlock.style.width = parentWidth * Mosaic.minWidth + 'px';
 
@@ -152,7 +152,7 @@ class Mosaic {
             target.focus();
             target.classList.add('focused');
             target.style.backgroundColor = blockColor;
-            target.style.borderColor =borderColor;
+            target.style.borderColor = borderColor;
         }
     }
 }
@@ -162,10 +162,14 @@ const addEventListeners = function () {
     const borderColorSelector = document.getElementById('border-color');
     const blockColorSelector = document.getElementById('fragment-color');
     const blocksGenerator = document.getElementById('generate-button');
+    const userSetAmount = document.getElementById('user-amount');
+    const userSetRandom = document.getElementById('set-random');
 
     borderColorSelector.addEventListener('change', onBorderChange);
     blockColorSelector.addEventListener('change', onBlockColorChange);
     blocksGenerator.addEventListener('click', onGenerateBtnClick);
+    userSetAmount.addEventListener('click',onGenerateBtnClick);
+    userSetRandom.addEventListener('click',onGenerateBtnClick)
 
 }
 
@@ -185,24 +189,27 @@ const onBlockColorChange = (event) => {
 }
 
 const onGenerateBtnClick = (event) => {
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
     const mosaic = document.getElementById('mosaic');
     mosaic.innerHTML = '';
-    const blocksAmount = getRandomAmount();
+    const setAmount = parseInt(document.getElementById("set-user").value);
+    const blocksAmount = setAmount ? setAmount : getRandomAmount();
     const data = {
         //todo change sizes
         // Просто збільшив їх вдвічі, як на мене норм.
-        mosaicHeight:1200,
-        mosaicWidth:1600,
+        mosaicHeight: 1200,
+        mosaicWidth: 1600,
         blocksAmount: blocksAmount
     }
     const blocks = new Mosaic(data);
     mosaic.append(blocks.element);
 }
 
-const getRandomAmount  = () =>{
-        //todo возможно ли сократить формулу;
-        // Формулу можна спростити прибравши десятку, але тоді починає безбожно тупити. Залишаю на твій розсуд.
-        
+const getRandomAmount = () => {
+    //todo возможно ли сократить формулу;
+    // Формулу можна спростити прибравши десятку, але тоді починає безбожно тупити. Залишаю на твій розсуд.
+
     return MIN_NUMBER + Math.floor(Math.random() * (MAX_NUMBER / 10 - 1 - MIN_NUMBER));
 }
 
