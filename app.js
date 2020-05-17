@@ -1,6 +1,8 @@
 const MIN_NUMBER = 9;
 const MAX_NUMBER = 40000;
 
+//Коментарі перед тим як заливати прибери
+
 class Mosaic {
     static minHeight;
     static minWidth;
@@ -26,6 +28,7 @@ class Mosaic {
 
     getSizes() {
         //todo изменить размеры;
+        //Тут імхо як не зроби все одно буде не дуже. 
         const blocks = this.params.blocksAmount;
         switch (true) {
             case blocks <= 200:
@@ -49,6 +52,7 @@ class Mosaic {
 
     createTemplate() {
         //змінні перейменовано, але трохи код підправити;
+        // Імхо якщо працює то краще не чіпати. В теорії блоки коду в іфах можна замінити рекурсією, але боюся що буде Stack Overflow і краще залишити як є 
         const blocks = this.params.blocksAmount;
         let counter = 1;
 
@@ -182,11 +186,13 @@ const onBlockColorChange = (event) => {
 
 const onGenerateBtnClick = (event) => {
     const mosaic = document.getElementById('mosaic');
+    mosaic.innerHTML = '';
     const blocksAmount = getRandomAmount();
     const data = {
         //todo change sizes
-        mosaicHeight:600,
-        mosaicWidth:800,
+        // Просто збільшив їх вдвічі, як на мене норм.
+        mosaicHeight:1200,
+        mosaicWidth:1600,
         blocksAmount: blocksAmount
     }
     const blocks = new Mosaic(data);
@@ -195,7 +201,9 @@ const onGenerateBtnClick = (event) => {
 
 const getRandomAmount  = () =>{
         //todo возможно ли сократить формулу;
-    return MIN_NUMBER + Math.floor(Math.random() * (MAX_NUMBER / 10 + 1 - MIN_NUMBER));
+        // Формулу можна спростити прибравши десятку, але тоді починає безбожно тупити. Залишаю на твій розсуд.
+        
+    return MIN_NUMBER + Math.floor(Math.random() * (MAX_NUMBER / 10 - 1 - MIN_NUMBER));
 }
 
 addEventListeners();

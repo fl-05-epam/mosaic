@@ -7,15 +7,34 @@
     display: flex;
     justify-content: space-between;
     margin: 0 10px;
+    max-width: 1600px;
+    margin:5px auto 20px auto; 
+}
+
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label{
+    margin-left: 5px;
+}
+
+#generate-button{
+    color: white;
+    background-color:  #10d3a2;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 5px;
 }
 
 #mosaic{
     min-height: 400px; /* Тимчасова величина, просто щоб було видно */
     border: 1px solid gray;
     box-sizing: border-box;
-    /*todo поміняти розміри*/
-    width: 800px;
-    height: 600px;
+    width: 1600px;
+    height: 1200px;
     margin: 0 auto;
 }
 
