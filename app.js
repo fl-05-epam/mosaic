@@ -76,8 +76,8 @@ class Mosaic {
 
             for (let i = 0; i < blocksElement.length; i++) {
                 const parent = blocksElement[i];
-                const parentHeight = parseInt(parent.style.height,10) / Mosaic.minHeight;
-                const parentWidth = parseInt(parent.style.width,10) / Mosaic.minWidth;
+                const parentHeight = parseInt(parent.style.height, 10) / Mosaic.minHeight;
+                const parentWidth = parseInt(parent.style.width, 10) / Mosaic.minWidth;
 
                 if (parentHeight > 1 && parentWidth > 1) {
                     Math.round(Math.random())
@@ -125,7 +125,7 @@ class Mosaic {
         parent.classList.remove('mosaic__block');
         parent.removeAttribute('tabindex');
 
-        const heightOne = Math.floor(Math.random() * (parentHeight - 1))+1;
+        const heightOne = Math.floor(Math.random() * (parentHeight - 1)) + 1;
         const firstBlock = this.createBlock(id, parent);
         firstBlock.style.height = heightOne * Mosaic.minHeight + 'px';
         firstBlock.style.width = parentWidth * Mosaic.minWidth + 'px';
@@ -156,8 +156,8 @@ const addEventListeners = function () {
     borderColorSelector.addEventListener('change', onBorderChange);
     blockColorSelector.addEventListener('change', onBlockColorChange);
     blocksGenerator.addEventListener('click', onGenerateBtnClick);
-    userSetAmount.addEventListener('click',onGenerateBtnClick);
-    userSetRandom.addEventListener('click',onGenerateBtnClick)
+    userSetAmount.addEventListener('click', onUserBtnClick);
+    userSetRandom.addEventListener('click', onGenerateBtnClick)
 
 }
 
@@ -180,8 +180,7 @@ const onGenerateBtnClick = (event) => {
     const modal = document.getElementById("my-modal");
     modal.style.display = "none";
     const mosaic = document.getElementById('mosaic');
-    const setAmount = parseInt(document.getElementById("set-user").value);
-    const blocksAmount = setAmount ? setAmount : getRandomAmount();
+    const blocksAmount = getRandomAmount();
     const data = {
         mosaicWidth: 1000,
         mosaicHeight: 600,
@@ -194,6 +193,24 @@ const onGenerateBtnClick = (event) => {
 
 const getRandomAmount = () => {
     return Math.floor(Math.random() * (MAX_NUMBER - 1 - MIN_NUMBER)) + MIN_NUMBER;
+}
+
+const onUserBtnClick = (event)=>{
+    const modal = document.getElementById("my-modal");
+    modal.style.display = "none";
+    let setAmount = parseInt(document.getElementById("set-user").value);
+    if (setAmount < 9){
+        setAmount = 9;
+    }
+    const blocksAmount = setAmount ? setAmount : getRandomAmount();
+    const data = {
+        mosaicWidth: 1000,
+        mosaicHeight: 600,
+        blocksAmount: blocksAmount
+    }
+    mosaic.innerHTML = '';
+    const blocks = new Mosaic(data);
+    mosaic.append(blocks.element);
 }
 
 addEventListeners();
